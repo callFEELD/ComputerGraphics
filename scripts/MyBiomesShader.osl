@@ -1,0 +1,13 @@
+// Implementation of exercise 2.2
+
+shader MyBiomesShader(
+    normal Normal = 0.0,
+    color HeightMap = 0.0,
+    color MoistureMap = 0.0,
+    color ColorMap=(0,0,0),
+
+    output color Color = 0.0
+)
+{
+    Color = ColorMap;
+}
