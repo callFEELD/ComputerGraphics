@@ -1,0 +1,29 @@
+#include "stdosl.h"
+
+shader MyLambertShading (
+        normal NormalSurface = 0.0,
+        color ColorAmbient = 0.0,
+        color ColorDiffus = 0.0,
+        vector PosLight = 0.0,
+        output color Color = 0.0
+    ) 
+{
+    // Normal could also be N
+    // Transform the normals
+    vector NormalsTransformed = transform("world", NormalSurface);
+    
+    // Transform light to world, if necessary
+    vector PosLightWorld = transform("world", PosLight);
+    
+    // Also transform the current point that is shaded to world
+    vector CurrentPointTransformed = transform("world", P);
+    
+    // Compute the light vector
+    vector lightVector = normalize(PosLightWorld - CurrentPointTransformed);
+    
+    // First part of the calculation
+    float temp = max(dot(lightVector, NormalsTransformed), 0);
+    
+    Color = ColorAmbient + (ColorDiffus/M_PI) * temp;
+    
+}
