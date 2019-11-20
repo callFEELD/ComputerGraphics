@@ -17,10 +17,7 @@ shader MyDispl (
     ) 
 {
     // Path to the height image
-    // NEEDS TO BE ADJUSTED TO YOUR SYSTEM
-    // string path = "path/to/repo/textures/height_map.png";
-    string path = "C:/Users/Nickels/Dropbox/_Studium/_Fächer/Computergrafik/Testat/repo/ComputerGraphics/textures/height_map.png";
-    
+    string path = "./textures/height/height_map.png";
     // Add the shift
     float x = Uv[0] + ShiftX;
     float y = Uv[1] + ShiftY;
