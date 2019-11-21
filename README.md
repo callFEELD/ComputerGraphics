@@ -7,7 +7,7 @@ Uni project
 
 1.2 - Nickels ✔️
 
-2.1 - Pascal
+2.1 - Pascal ✔️
 
 2.2 - Pascal & Nickels
 
