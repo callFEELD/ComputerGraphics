@@ -31,10 +31,12 @@ def save_texture(texture_data, filename):
     image = bpy.data.images.new(filename, width=width, height=height)
 
     # create black and white image, based of an rgba vector
-    image_pixel = [[0 for y in range(height)] for x in range(width)]
+    image_pixel = [0 for y in range(height) for x in range(width)]
     for y in range(height):
         for x in range(width):
-            r, g, b = texture_data[x][y]
+            r = texture_data[x][y]
+            g = r
+            b = r
             a = 1
 
             image_pixel[int((x * height) + y)] = [r, g, b, a]
