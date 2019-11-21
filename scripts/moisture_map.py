@@ -4,8 +4,6 @@ This script is part of the exercise 2.1
 
 This script is only executeable in blender.
 
-To get the image file for blender, run the script export_moisture_map.py.
-
 Basic tutorial of noise:        https://www.redblobgames.com/maps/terrain-from-noise/#noise
 Perlin-Noise Algorithm:         https://en.wikipedia.org/wiki/Perlin_noise#Algorithm_detail
 
@@ -22,22 +20,39 @@ import mathutils
 
 def save_texture(texture_data, filename):
     """
-    This functions stores 2d arrays (images) into a numpy file.
-    After that, the function export_texture() can be called in order
-    to save the texture data into a image.
-    
-    export_texture() can not be called inside blender (since matplotlib
-    is not accesable inside blender). Therefore this function is used to
-    store the texture data from blender into a file. This file can then
-    be converted into an image file outside of blender.
+    This functions stores 2d arrays (images) into an image.
     
     :param texture_data: numpy array
     :param filename: filname (path) of the file
     """
-    np.save(filename, texture_data)
+    height, width = len(texture_data[0]), len(texture_data)
+
+    # blank image
+    image = bpy.data.images.new(filename, width=width, height=height)
+
+    # create black and white image, based of an rgba vector
+    image_pixel = [[0 for y in range(height)] for x in range(width)]
+    for y in range(height):
+        for x in range(width):
+            r, g, b = texture_data[x][y]
+            a = 1
+
+            image_pixel[int((x * height) + y)] = [r, g, b, a]
+
+    # make it only 1d for blender
+    image_pixel = [color_channel for x in image_pixel for color_channel in x]
+
+    # assign pixels
+    image.pixels = image_pixel
+
+    # write image
+    image.filepath_raw = filename
+    image.file_format = 'PNG'
+    image.save()
+    
 
 
-def generate_noise_map(height, width):
+def generate_noise_map(height, width, scale):
     """
     This functions generates a Noise map with values between 0 and 1.
     
@@ -47,23 +62,24 @@ def generate_noise_map(height, width):
     
     :param height: Height of the noise map
     :param width: Width of the noise map
+    :param scale: Scale of the perlin noise
     :return: Map with values between 0 and 1 (greyscale image)
     """
     height = int(height)
     width = int(width)
     # init the noisemap with zeros
-    noise_map = [[0 for y in range(height-1)] for x in range(width-1)]
+    noise_map = [[0 for y in range(height)] for x in range(width)]
     
     # adding the noise to each pixel of the noise map
-    for y in range(height -1):
-        for x in range(width -1):
-            nx = x/width -0.5
-            ny = y/height -0.5
+    for y in range(height):
+        for x in range(width):
+            nx = x/width * scale
+            ny = y/height * scale
             noise_map[y][x] = mathutils.noise.noise(mathutils.Vector((nx, ny, 1)))
     
     return noise_map
 
 
 if __name__ == "__main__":
-    moisture_map = generate_noise_map(1024, 1024)
+    moisture_map = generate_noise_map(1024, 1024, 20)
     save_texture(moisture_map, "textures/moisture_map")
