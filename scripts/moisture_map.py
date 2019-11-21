@@ -53,6 +53,31 @@ def save_texture(texture_data, filename):
     image.save()
     
 
+def normalize(texture_map):
+    """
+    This functions normalize the noise map/texture maps.
+
+    Due to appearing negative numbers, the 2d array must
+    be normalized.
+
+    :param texture_map: 2d array, that should be normalized
+    :return: normalized 2d array
+    """
+    # finding the smallest value of the texture map
+    smallest_value = min(min(texture_map))
+    # finding the largest value of the texture map
+    largest_value = max(max(texture_map))
+    value_range = largest_value + abs(smallest_value)
+
+    # Go through the 2d array and update the values
+    # according to the smallest and highest values
+    for y in range(len(texture_map)):
+        for x in range(len(texture_map[y])):
+            # The normalized value is = (current value + the smallest value) / value_range
+            texture_map[y][x] = (texture_map[y][x] + abs(smallest_value)) / value_range
+    
+    return texture_map
+
 
 def generate_noise_map(height, width, scale):
     """
@@ -79,9 +104,9 @@ def generate_noise_map(height, width, scale):
             ny = y/height * scale
             noise_map[y][x] = mathutils.noise.noise(mathutils.Vector((nx, ny, 1)))
     
-    return noise_map
+    return normalize(noise_map)
 
 
 if __name__ == "__main__":
     moisture_map = generate_noise_map(1024, 1024, 20)
-    save_texture(moisture_map, "textures/moisture_map")
+    save_texture(moisture_map, "textures/moisture_map.png")
