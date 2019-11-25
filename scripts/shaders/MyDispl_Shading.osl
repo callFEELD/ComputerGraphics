@@ -6,52 +6,36 @@ float average(color colorValue)
     return ((colorValue[0] + colorValue[1] + colorValue[2]) / 3.0) * colorValue[3];
 }
 
-shader MyDispl (
-        normal Normal = 0.0,
+shader MyBiomeShading (
         point Uv = 0.0,
-        float HeightFactor = 1.0,
-        float WaterLevel = 0.5,
-        float ShiftX = 0.0,
-        float ShiftY = 0.0,
-        output vector Displacement = 0.0
+        float Height = 0.0,
+        string MoistureMap = "",
+        color Water = 0.0,
+        string BiomeMap = "",
+        float WaterLevel = 0.0,
+        output color Color = 0.0,
+        output color WaterColor = 0.0
     ) 
 {
-    // Path to the height image
-    string path = "./textures/height/height_map.png";
-    // Add the shift
-    float x = Uv[0] + ShiftX;
-    float y = Uv[1] + ShiftY;
     
-    // Reduce it back between 0 and 1
-    while (x > 1.0) {
-        x -= 1.0;
+    
+    float x = average(texture(MoistureMap, Uv[0], 1 - Uv[1]));
+    float y = Height;
+    
+    
+    
+    color c = 0.0;
+    color wc = 0.0;
+    
+    // Set color, depending on the height
+    if (y <= WaterLevel && WaterLevel > 0) {
+        c = Water;
+        wc = 1.0;
+    } else {
+        c = texture(BiomeMap, x, 1- y, "wrap", "clamp");
     }
     
-    while (x < 0.0) {
-        x += 1.0;
-    }
-    
-    // Do the same for y
-    while (y > 1.0) {
-        y -= 1.0;
-    }
-    
-    while (y < 0.0) {
-        y += 1.0;
-    }
-    
-    // Access the height map with the calculated coordinates
-    color HeightImage = (color) texture(path, x, y);
-    
-    // Calculate the average from the rgba values
-    float height = average(HeightImage);
-    
-    // Implement the water level
-    if (height < WaterLevel) {
-        height = WaterLevel;
-    }
-    
-    // Finally displace
-    Displacement = normalize(Normal) * height * HeightFactor;
+    Color = c;
+    WaterColor = wc;
 }
 

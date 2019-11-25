@@ -1,0 +1,112 @@
+OpenShadingLanguage 1.00
+# Compiled by oslc 1.9.9
+# options: -o C:\Users\Nickels\AppData\Local\Temp\tmp756h9vzc.oso -IC:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader
+shader MyPhongShading
+param	normal	Normal	0 0 0		%read{3,3} %write{0,0} %initexpr
+param	color	ColorSpecular	0 0 0		%read{16,16} %write{2147483647,-1}
+param	color	ColorAmbient	0 0 0		%read{27,27} %write{2147483647,-1}
+param	color	ColorDiffus	0 0 0		%read{25,25} %write{2147483647,-1}
+param	float	SizeSpecular	100		%read{13,21} %write{2147483647,-1}
+param	vector	PosLight	0 0 0		%read{8,8} %write{2147483647,-1}
+param	vector	PosCamera	0 0 0		%read{10,10} %write{1,1} %initexpr
+oparam	color	Color	0 0 0		%read{2147483647,-1} %write{28,28}
+global	point	P	%read{6,6} %write{2147483647,-1}
+global	vector	I	%read{1,1} %write{2147483647,-1}
+global	normal	N	%read{0,0} %write{2147483647,-1}
+local	vector	NormalTransformed	%read{19,23} %write{4,4}
+local	vector	CurrentPointTransformed	%read{11,11} %write{6,6}
+local	vector	PosLightTransformed	%read{11,11} %write{8,8}
+local	vector	PosCameraTransformed	%read{17,17} %write{10,10}
+local	vector	LightVector	%read{17,23} %write{12,12}
+local	color	Ks	%read{22,22} %write{16,16}
+local	vector	Hvalue	%read{19,19} %write{18,18}
+local	color	Phong	%read{28,28} %write{22,22}
+local	float	LambertTemp	%read{26,26} %write{24,24}
+local	color	Lambert	%read{27,27} %write{26,26}
+temp	normal	$tmp1	%read{4,4} %write{3,3}
+const	string	$const1	"world"		%read{3,10} %write{2147483647,-1}
+const	string	$const2	"transform"		%read{2,9} %write{2147483647,-1}
+const	string	$const3	"common"		%read{3,10} %write{2147483647,-1}
+temp	vector	$tmp2	%read{12,12} %write{11,11}
+temp	float	$tmp3	%read{15,15} %write{13,13}
+const	float	$const5	8		%read{13,14} %write{2147483647,-1}
+const	float	$const6	3.1415927		%read{14,25} %write{2147483647,-1}
+temp	float	$tmp4	%read{15,15} %write{14,14}
+temp	float	$tmp5	%read{16,16} %write{15,15}
+temp	vector	$tmp6	%read{18,18} %write{17,17}
+temp	float	$tmp7	%read{22,22} %write{21,21}
+temp	float	$tmp8	%read{21,21} %write{20,20}
+temp	float	$tmp9	%read{20,20} %write{19,19}
+const	float	$const8	0		%read{20,24} %write{2147483647,-1}
+temp	float	$tmp10	%read{24,24} %write{23,23}
+temp	color	$tmp11	%read{26,26} %write{25,25}
+temp	color	$tmp12	%read{28,28} %write{27,27}
+code Normal
+# scripts\shaders\MyPhongShading.osl:5
+#         color ColorSpecular = 0.0,
+	assign		Normal N 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{5} %argrw{"wr"}
+code PosCamera
+# scripts\shaders\MyPhongShading.osl:11
+#         output color Color = 0.0
+	assign		PosCamera I 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{11} %argrw{"wr"}
+code ___main___
+# scripts\shaders\MyPhongShading.osl:17
+#     vector CurrentPointTransformed = transform("world", P);
+	functioncall	$const2 4 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{17} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:371
+#   return transform("common", to, p);
+	transformn	$tmp1 $const3 $const1 Normal 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{371} %argrw{"wrrr"}
+# scripts\shaders\MyPhongShading.osl:17
+#     vector CurrentPointTransformed = transform("world", P);
+	normalize	NormalTransformed $tmp1 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{17} %argrw{"wr"}
+# scripts\shaders\MyPhongShading.osl:18
+#     vector PosLightTransformed = transform("world", PosLight);
+	functioncall	$const2 7 	%line{18} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:379
+#   return transform("common", to, p);
+	transform	CurrentPointTransformed $const3 $const1 P 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{379} %argrw{"wrrr"}
+# scripts\shaders\MyPhongShading.osl:19
+#     vector PosCameraTransformed = transform("world", PosCamera);
+	functioncall	$const2 9 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{19} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:375
+#   return transform("common", to, p);
+	transformv	PosLightTransformed $const3 $const1 PosLight 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{375} %argrw{"wrrr"}
+# scripts\shaders\MyPhongShading.osl:20
+#     
+	functioncall	$const2 11 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{20} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:375
+#   return transform("common", to, p);
+	transformv	PosCameraTransformed $const3 $const1 PosCamera 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{375} %argrw{"wrrr"}
+# scripts\shaders\MyPhongShading.osl:23
+#     
+	sub		$tmp2 PosLightTransformed CurrentPointTransformed 	%filename{"scripts\shaders\MyPhongShading.osl"} %line{23} %argrw{"wrr"}
+	normalize	LightVector $tmp2 	%argrw{"wr"}
+# scripts\shaders\MyPhongShading.osl:26
+#     
+	add		$tmp3 SizeSpecular $const5 	%line{26} %argrw{"wrr"}
+	mul		$tmp4 $const5 $const6 	%argrw{"wrr"}
+	div		$tmp5 $tmp3 $tmp4 	%argrw{"wrr"}
+	mul		Ks $tmp5 ColorSpecular 	%argrw{"wrr"}
+# scripts\shaders\MyPhongShading.osl:28
+#     
+	add		$tmp6 LightVector PosCameraTransformed 	%line{28} %argrw{"wrr"}
+	normalize	Hvalue $tmp6 	%argrw{"wr"}
+# scripts\shaders\MyPhongShading.osl:30
+#     
+	dot		$tmp9 NormalTransformed Hvalue 	%line{30} %argrw{"wrr"}
+	max		$tmp8 $tmp9 $const8 	%argrw{"wrr"}
+	pow		$tmp7 $tmp8 SizeSpecular 	%argrw{"wrr"}
+	mul		Phong Ks $tmp7 	%argrw{"wrr"}
+# scripts\shaders\MyPhongShading.osl:33
+#     
+	dot		$tmp10 LightVector NormalTransformed 	%line{33} %argrw{"wrr"}
+	max		LambertTemp $tmp10 $const8 	%argrw{"wrr"}
+# scripts\shaders\MyPhongShading.osl:35
+#     
+	div		$tmp11 ColorDiffus $const6 	%line{35} %argrw{"wrr"}
+	mul		Lambert $tmp11 LambertTemp 	%argrw{"wrr"}
+# scripts\shaders\MyPhongShading.osl:38
+# }
+	add		$tmp12 ColorAmbient Lambert 	%line{38} %argrw{"wrr"}
+	add		Color $tmp12 Phong 	%argrw{"wrr"}
+	end

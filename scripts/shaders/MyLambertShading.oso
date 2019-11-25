@@ -1,0 +1,57 @@
+OpenShadingLanguage 1.00
+# Compiled by oslc 1.9.9
+# options: -o C:\Users\Nickels\AppData\Local\Temp\tmp21xek1_3.oso -IC:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader
+shader MyLambertShading
+param	normal	NormalSurface	0 0 0		%read{1,1} %write{2147483647,-1}
+param	color	ColorAmbient	0 0 0		%read{12,12} %write{2147483647,-1}
+param	color	ColorDiffus	0 0 0		%read{10,10} %write{2147483647,-1}
+param	vector	PosLight	0 0 0		%read{3,3} %write{2147483647,-1}
+oparam	color	Color	0 0 0		%read{2147483647,-1} %write{12,12}
+global	point	P	%read{5,5} %write{2147483647,-1}
+local	vector	NormalsTransformed	%read{8,8} %write{1,1}
+local	vector	PosLightWorld	%read{6,6} %write{3,3}
+local	vector	CurrentPointTransformed	%read{6,6} %write{5,5}
+local	vector	lightVector	%read{8,8} %write{7,7}
+local	float	temp	%read{11,11} %write{9,9}
+const	string	$const1	"world"		%read{1,5} %write{2147483647,-1}
+const	string	$const2	"transform"		%read{0,4} %write{2147483647,-1}
+const	string	$const3	"common"		%read{1,5} %write{2147483647,-1}
+temp	vector	$tmp1	%read{7,7} %write{6,6}
+temp	float	$tmp2	%read{9,9} %write{8,8}
+const	float	$const5	0		%read{9,9} %write{2147483647,-1}
+const	float	$const6	3.1415927		%read{10,10} %write{2147483647,-1}
+temp	color	$tmp3	%read{11,11} %write{10,10}
+temp	color	$tmp4	%read{12,12} %write{11,11}
+code ___main___
+# scripts\shaders\MyLambertShading.osl:14
+#     
+	functioncall	$const2 2 	%filename{"scripts\shaders\MyLambertShading.osl"} %line{14} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:371
+#   return transform("common", to, p);
+	transformn	NormalsTransformed $const3 $const1 NormalSurface 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{371} %argrw{"wrrr"}
+# scripts\shaders\MyLambertShading.osl:17
+#     
+	functioncall	$const2 4 	%filename{"scripts\shaders\MyLambertShading.osl"} %line{17} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:375
+#   return transform("common", to, p);
+	transformv	PosLightWorld $const3 $const1 PosLight 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{375} %argrw{"wrrr"}
+# scripts\shaders\MyLambertShading.osl:20
+#     
+	functioncall	$const2 6 	%filename{"scripts\shaders\MyLambertShading.osl"} %line{20} %argrw{"r"}
+# C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h:379
+#   return transform("common", to, p);
+	transform	CurrentPointTransformed $const3 $const1 P 	%filename{"C:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader\stdosl.h"} %line{379} %argrw{"wrrr"}
+# scripts\shaders\MyLambertShading.osl:23
+#     
+	sub		$tmp1 PosLightWorld CurrentPointTransformed 	%filename{"scripts\shaders\MyLambertShading.osl"} %line{23} %argrw{"wrr"}
+	normalize	lightVector $tmp1 	%argrw{"wr"}
+# scripts\shaders\MyLambertShading.osl:26
+#     
+	dot		$tmp2 lightVector NormalsTransformed 	%line{26} %argrw{"wrr"}
+	max		temp $tmp2 $const5 	%argrw{"wrr"}
+# scripts\shaders\MyLambertShading.osl:28
+#     
+	div		$tmp3 ColorDiffus $const6 	%line{28} %argrw{"wrr"}
+	mul		$tmp4 $tmp3 temp 	%argrw{"wrr"}
+	add		Color ColorAmbient $tmp4 	%argrw{"wrr"}
+	end

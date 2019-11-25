@@ -1,0 +1,29 @@
+#include "stdosl.h"
+
+// Calculate an average of all colors
+float average(color colorValue)
+{
+    return ((colorValue[0] + colorValue[1] + colorValue[2]) / 3.0) * colorValue[3];
+}
+
+shader MyHeightReader (
+        string HeightMap = "",
+        point Uv = 0.0,
+        float HeightFactor = 1.0,
+        float ShiftX = 0.0,
+        float ShiftY = 0.0,
+        output float Height = 0.0
+    ) 
+{
+    // Add the shift
+    float x = Uv[0] + ShiftX;
+    float y = Uv[1] + ShiftY;
+    
+    float h = average(texture(HeightMap, x, 1 - y, "wrap", "periodic")) * HeightFactor;
+    
+    // printf("%f\n", h);
+    
+    // Access the height map with the adjusted coordinates
+    Height = h;
+}
+

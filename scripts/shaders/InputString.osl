@@ -1,0 +1,11 @@
+#include "stdosl.h"
+
+shader MyBiomeShading (
+        string Path = "",
+        output string PathOut = ""
+    ) 
+{
+    PathOut = Path;
+    
+}
+
