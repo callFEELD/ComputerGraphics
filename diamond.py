@@ -12,6 +12,9 @@ from moisture_map import save_texture, normalize
 # Size of the texture, at the moment only (2^n)+1 is possible and only quadratic textures
 TEXTURE_SIZE = 1025  # 32769 1025 5 17
 
+# ATTENTION: All values are only relative, the array gets normalized at the end
+# so setting a seed of 10 does not make the terrain higher than setting it to 0.1
+
 # Lower and upper values of the random generator, can roughly define the steepness
 RANDOM_LOWER = -2
 RANDOM_UPPER = 2
@@ -20,6 +23,9 @@ RANDOM_UPPER = 2
 # random value. 2 is a good value, lower makes rougher terrain, higher smoother
 DIVIDOR_MULTIPLIER = 2.2
 
+# Defines lower and upper values of the random generator used to seed the Algorithm
+SEED_LOWER = -5
+SEED_UPPER = 5
 
 
 # Initialize Array with Zeros
@@ -28,10 +34,10 @@ arr = np.zeros(shape=(TEXTURE_SIZE,TEXTURE_SIZE))
 # Performs Diamond-Square algorithm
 def diamond_square():
     # Seed the 4 corners with random values
-    arr[0][0] = np.random.uniform(0, 5)
-    arr[0][TEXTURE_SIZE-1] = np.random.uniform(0, 5)
-    arr[TEXTURE_SIZE-1][0] = np.random.uniform(0, 5)
-    arr[TEXTURE_SIZE-1][TEXTURE_SIZE-1] = np.random.uniform(0, 5)
+    arr[0][0] = np.random.uniform(SEED_LOWER,SEED_UPPER)
+    arr[0][TEXTURE_SIZE-1] = np.random.uniform(SEED_LOWER, SEED_UPPER)
+    arr[TEXTURE_SIZE-1][0] = np.random.uniform(SEED_LOWER, SEED_UPPER)
+    arr[TEXTURE_SIZE-1][TEXTURE_SIZE-1] = np.random.uniform(SEED_LOWER, SEED_UPPER)
 
 
     step_size = TEXTURE_SIZE - 1
@@ -92,8 +98,8 @@ def square(x, y, step_size, dividor):
 
     arr[x][y] = fin
 
+
+
 diamond_square()
 arr_norm = normalize(arr)
-for i in arr_norm:
-    print(i)
-save_texture(arr_norm,"//heightmap.png")
+save_texture(arr_norm,"//heightmap.png")l
