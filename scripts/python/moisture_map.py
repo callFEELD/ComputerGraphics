@@ -64,9 +64,9 @@ def normalize(texture_map):
     :return: normalized 2d array
     """
     # finding the smallest value of the texture map
-    smallest_value = min(min(texture_map))
+    smallest_value = np.amin(texture_map)
     # finding the largest value of the texture map
-    largest_value = max(max(texture_map))
+    largest_value = np.amax(texture_map)
     value_range = largest_value + abs(smallest_value)
 
     # Go through the 2d array and update the values
