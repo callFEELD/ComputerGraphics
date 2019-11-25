@@ -9,7 +9,7 @@ Uni project
 
 2.1 - Pascal ✔️
 
-2.2 - Pascal & Nickels
+2.2 - Pascal & Nickels ✔️
 
 3   - Tobi
 
@@ -17,23 +17,23 @@ Uni project
 
 ````
 .
-├── ComputerGrafik.blend		Moisture Map Generation
-├── displacement.blend			Displacement Mapping with Height Map
-├── shading.blend				    Lambert & Phong Shading
-├── displ_shading				    Shading with Moisture and Height
+├── ComputerGrafik.blend: Moisture Map Generation
+├── displacement.blend: Displacement Mapping with Height Map
+├── shading.blend: Lambert & Phong Shading
+├── displ_shading: Shading with Moisture and Height
 |
-├── docs						        Documentation on the project
+├── docs: Documentation on the project
 |   └── 
-├── scripts						      Python scripts			
+├── scripts: Python scripts			
 |   └── 
-├── shaders						      OSL Shaders
+├── shaders: OSL Shaders
 |   └── 
-├── textures					      Textures used
+├── textures: Textures used
 |	├── biomes
 |	├── height
 |	├── moisture
 |   └── normal
-└── videos						      Videos
+└── videos: Videos
 
 ````
 
