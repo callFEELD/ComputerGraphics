@@ -84,4 +84,4 @@ diamond_square()
 arr_norm = normalize(arr)
 for i in arr_norm:
     print(i)
-save_texture(arr_norm,"C:\\Users\\tomat\\Nextcloud\\Documents\\Uni Winter 2019\\Computergrafik\\Testat\\1.png")
+save_texture(arr_norm,"//heightmap.png")
