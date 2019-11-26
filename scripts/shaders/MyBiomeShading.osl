@@ -21,7 +21,7 @@ shader MyBiomeShading (
     
     // Get the height and the moisture
     float x = average(texture(MoistureMap, Uv[0], 1 - Uv[1]));
-    float y = Height;
+    float y = Height-WaterLevel;
     
     
     // Create the colors that are for the output
@@ -33,7 +33,7 @@ shader MyBiomeShading (
     
     
     // Set color, depending on the height
-    if (y <= WaterLevel && WaterLevel > 0) {
+    if (Height <= WaterLevel && WaterLevel > 0) {
         c = Water;
         wm = 1.0;
         lm = 0.0;
