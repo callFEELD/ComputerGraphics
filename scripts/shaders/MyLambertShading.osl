@@ -8,14 +8,9 @@ shader MyLambertShading (
         output color Color = 0.0
     ) 
 {
-    // Normal could also be N
-    // Transform the normals
+    // Transform everything to world
     vector NormalsTransformed = transform("world", NormalSurface);
-    
-    // Transform light to world, if necessary
     vector PosLightWorld = transform("world", PosLight);
-    
-    // Also transform the current point that is shaded to world
     vector CurrentPointTransformed = transform("world", P);
     
     // Compute the light vector
@@ -24,6 +19,7 @@ shader MyLambertShading (
     // First part of the calculation
     float temp = max(dot(lightVector, NormalsTransformed), 0);
     
+    // do the rest
     Color = ColorAmbient + (ColorDiffus/M_PI) * temp;
     
 }

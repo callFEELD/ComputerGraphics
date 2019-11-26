@@ -15,6 +15,7 @@ shader MyDispl (
         output vector Displacement = 0.0
     ) 
 {
+    // As you cant change input parameters, create internal one
     float HeightInternal = Height;
     
     // Implement the water level

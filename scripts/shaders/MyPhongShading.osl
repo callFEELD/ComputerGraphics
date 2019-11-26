@@ -12,7 +12,7 @@ shader MyPhongShading (
     ) 
 {
     
-    // Transform vectors
+    // Transform vectors to world coordinates
     vector NormalTransformed = normalize(transform("world", Normal));
     vector CurrentPointTransformed = transform("world", P);
     vector PosLightTransformed = transform("world", PosLight);
@@ -24,7 +24,8 @@ shader MyPhongShading (
     // #### PHONG ####
     color Ks = ((SizeSpecular + 8) / (8 * M_PI)) * ColorSpecular;
     
-    vector Hvalue = normalize(LightVector + PosCameraTransformed); // length(LightVector + ViewVector);
+    vector Hvalue = normalize(LightVector + PosCameraTransformed); 
+    // length(LightVector + ViewVector);
     
     color Phong = Ks * pow(max(dot(NormalTransformed, Hvalue), 0), SizeSpecular);
     

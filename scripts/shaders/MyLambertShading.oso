@@ -1,6 +1,6 @@
 OpenShadingLanguage 1.00
 # Compiled by oslc 1.9.9
-# options: -o C:\Users\Nickels\AppData\Local\Temp\tmp21xek1_3.oso -IC:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader
+# options: -o C:\Users\Nickels\Dropbox\_Studium\_Fächer\Computergrafik\Testat\ComputerGraphics\scripts\shaders\MyLambertShading.oso -IC:\Program Files\Blender Foundation\Blender\2.80\scripts\addons\cycles\shader
 shader MyLambertShading
 param	normal	NormalSurface	0 0 0		%read{1,1} %write{2147483647,-1}
 param	color	ColorAmbient	0 0 0		%read{12,12} %write{2147483647,-1}

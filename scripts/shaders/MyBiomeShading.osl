@@ -14,28 +14,36 @@ shader MyBiomeShading (
         string BiomeMap = "",
         float WaterLevel = 0.0,
         output color Color = 0.0,
-        output color WaterColor = 0.0
+        output color WaterMap = 0.0,
+        output color LandMap = 0.0
     ) 
 {
     
-    
+    // Get the height and the moisture
     float x = average(texture(MoistureMap, Uv[0], 1 - Uv[1]));
     float y = Height;
     
     
-    
+    // Create the colors that are for the output
     color c = 0.0;
-    color wc = 0.0;
+    // This will create a map showing all water masses
+    color wm = 0.0;
+    // This will create a map showing all land masses
+    color lm = 1.0;
+    
     
     // Set color, depending on the height
     if (y <= WaterLevel && WaterLevel > 0) {
         c = Water;
-        wc = 1.0;
+        wm = 1.0;
+        lm = 0.0;
     } else {
         c = texture(BiomeMap, x, 1- y, "wrap", "clamp");
     }
     
+    // Output
     Color = c;
-    WaterColor = wc;
+    WaterMap = wm;
+    LandMap = lm;
 }
 

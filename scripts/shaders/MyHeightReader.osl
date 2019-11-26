@@ -1,6 +1,6 @@
 #include "stdosl.h"
 
-// Calculate an average of all colors
+// Calculate an average of all rgba
 float average(color colorValue)
 {
     return ((colorValue[0] + colorValue[1] + colorValue[2]) / 3.0) * colorValue[3];
@@ -19,11 +19,9 @@ shader MyHeightReader (
     float x = Uv[0] + ShiftX;
     float y = Uv[1] + ShiftY;
     
-    float h = average(texture(HeightMap, x, 1 - y, "wrap", "periodic")) * HeightFactor;
+    // Access the texture with a periodic wrap
+    float h = average(texture(HeightMap, x, 1 - y, "wrap", "periodic")) * HeightFactor;    
     
-    // printf("%f\n", h);
-    
-    // Access the height map with the adjusted coordinates
     Height = h;
 }
 

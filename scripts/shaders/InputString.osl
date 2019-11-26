@@ -5,6 +5,8 @@ shader MyBiomeShading (
         output string PathOut = ""
     ) 
 {
+    
+    // This small script acts as a String input node
     PathOut = Path;
     
 }
