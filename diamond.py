@@ -78,7 +78,9 @@ def square(arr, x, y, step_size, dividor, random_upper, random_lower, tex_size):
 
 
 def diamond_square(width, height, random_upper, random_lower, dividor_multiplier, seed_lower, seed_upper, save_path):
-
+    
+    
+    
     # Create tex_size variable to store the width and height of the heightmap which will be generated
     # This is necessary as the algorithm can only use a limited set of sizes of the heightmap
     tex_size = 0
@@ -99,15 +101,14 @@ def diamond_square(width, height, random_upper, random_lower, dividor_multiplier
     
 
     # Cut the array to the desired width and height
-    # arr.resize((width,height))
-
-    cut_arr = np.zeros(shape=(width,height))
-    for i in range(width-1):
-        for j in range(height-1):
+    cut_arr = np.zeros(shape=(height,width))
+    for i in range(height):
+        for j in range(width):
             cut_arr[i][j] = arr[i][j]
 
     arr_norm = normalize(cut_arr)
-    if (save_path != ""):
-        save_texture(arr_norm,save_path)
+    if (save_path == ""):
+        save_path = "//heightmap.png"
+    save_texture(arr_norm,save_path)
     
-diamond_square(123,156,5,-5,2,0,5,"//heightmap.png")
+diamond_square(1920,1080,5,-5,2,0,5,"")
