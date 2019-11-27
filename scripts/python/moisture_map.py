@@ -25,7 +25,7 @@ def save_texture(texture_data, filename):
     :param texture_data: numpy array
     :param filename: filname (path) of the file
     """
-    height, width = len(texture_data[0]), len(texture_data)
+    height, width = len(texture_data), len(texture_data[0])
 
     # blank image
     image = bpy.data.images.new(filename, width=width, height=height)
@@ -34,12 +34,12 @@ def save_texture(texture_data, filename):
     image_pixel = [0 for y in range(height) for x in range(width)]
     for y in range(height):
         for x in range(width):
-            r = texture_data[x][y]
+            r = texture_data[y][x]
             g = r
             b = r
             a = 1
 
-            image_pixel[int((x * height) + y)] = [r, g, b, a]
+            image_pixel[int((y * width) + x)] = [r, g, b, a]
 
     # make it only 1d for blender
     image_pixel = [color_channel for x in image_pixel for color_channel in x]
@@ -95,7 +95,7 @@ def generate_noise_map(height, width, scale):
     height = int(height)
     width = int(width)
     # init the noisemap with zeros
-    noise_map = [[0 for y in range(height)] for x in range(width)]
+    noise_map = [[0 for x in range(width)] for y in range(height)]
     
     # adding the noise to each pixel of the noise map
     for y in range(height):
@@ -108,5 +108,5 @@ def generate_noise_map(height, width, scale):
 
 
 if __name__ == "__main__":
-    moisture_map = generate_noise_map(1024, 1024, 20)
-    save_texture(moisture_map, "textures/moisture/moisture_map.png")
+    moisture_map = generate_noise_map(1024, 2024, 20)
+    save_texture(moisture_map, "//textures/moisture/moisture_map.png")
