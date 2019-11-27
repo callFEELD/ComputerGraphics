@@ -99,10 +99,11 @@ def diamond_square(width, height, random_upper, random_lower, dividor_multiplier
     
 
     # Cut the array to the desired width and height
-    #arr.resize((height,width))
-    cut_arr = np.zeros(shape=(height,width))
-    for i in range(height):
-        for j in range(width):
+    # arr.resize((width,height))
+
+    cut_arr = np.zeros(shape=(width,height))
+    for i in range(width-1):
+        for j in range(height-1):
             cut_arr[i][j] = arr[i][j]
 
     arr_norm = normalize(cut_arr)
