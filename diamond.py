@@ -56,7 +56,6 @@ def diamond(arr, x, y, step_size, dividor, random_upper, random_lower):
     arr[int(x+step_size/2)][int(y+step_size/2)] = fin
     return arr
 
-# Performs square step; x and y represent the middle upper corner of a diamond
 def square(arr, x, y, step_size, dividor, random_upper, random_lower, tex_size):
     # Calculate half a step, needed to get the values from the middle of the diamon
     halfstep = step_size / 2
