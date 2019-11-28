@@ -78,7 +78,17 @@ def square(arr, x, y, step_size, dividor, random_upper, random_lower, tex_size):
 
 
 def diamond_square(width, height, random_upper, random_lower, dividor_multiplier, seed_lower, seed_upper, save_path):
-    
+    """
+    Main method for running the diamond-square algorithm
+        :param width: width of the heightmap
+        :param height: height of the heightmap
+        :param random_upper: highest value of the random generator
+        :param random_lower: lowest value of the random generator
+        :param dividor_multiplier: multiplies the divider each iteration; The dividor is applied to the random boundries
+        :param seed_lower: lower value for generating the seed
+        :param seed_upper: upper value for generating the seed
+        :param save_path: path to save the file to, "//heightmap.png" if string is empty
+    """
     
     
     # Create tex_size variable to store the width and height of the heightmap which will be generated
