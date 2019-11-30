@@ -8,6 +8,21 @@ from moisture_map import save_texture, normalize
 
 # Performs Diamond-Square algorithm
 def diamond_square_main(arr, random_upper, random_lower, dividor_multiplier, seed_lower, seed_upper, tex_size):
+    """Main Method of the Diamond-Square Algorithm
+    
+    Arguments:
+        arr {2d float array} -- Array which defines the heightmap
+        random_upper {float} -- upper value of the random generator
+        random_lower {float} -- lower value of the ranodm generator
+        dividor_multiplier {[type]} -- [description]
+        seed_lower {[type]} -- [description]
+        seed_upper {[type]} -- [description]
+        tex_size {[type]} -- [description]
+    
+    Returns:
+        float array -- Array which defines the heightmap with the diamond-square algorithm applied
+    """
+
     # Seed the 4 corners with random values
     arr[0][0] = np.random.uniform(seed_lower,seed_upper)
     arr[0][tex_size-1] = np.random.uniform(seed_lower, seed_upper)
@@ -40,6 +55,22 @@ def diamond_square_main(arr, random_upper, random_lower, dividor_multiplier, see
 
 # Performs diamond step, 
 def diamond(arr, x, y, step_size, dividor, random_upper, random_lower):
+    """Performs the diamond step of the diamons-square algorithm
+    
+    Arguments:
+        arr {2d float array} -- Array which defines the heightmap
+        x {int} -- X coordinate
+        y {int} -- Y coordinate
+        step_size {int} -- step size of the current interation
+        dividor {float} -- value by which the random boundries are divided
+        random_upper {float} -- upper value of the random generator
+        random_lower {float} -- lower value of the ranodm generator
+        tex_size {int} -- size of the texture/heightmap
+    
+    Returns:
+        float array -- Array which defines the heightmap with the diamond step applied
+    """
+
     # defines corners of the diamond | tl=top left; tr=top right; bl=bottom left; br=bottom right
     tl = arr[x][y]
     tr = arr[x][y+step_size]
@@ -57,6 +88,22 @@ def diamond(arr, x, y, step_size, dividor, random_upper, random_lower):
     return arr
 
 def square(arr, x, y, step_size, dividor, random_upper, random_lower, tex_size):
+    """Performs the square step of the diamons-square algorithm
+    
+    Arguments:
+        arr {2d float array} -- Array which defines the heightmap
+        x {int} -- X coordinate
+        y {int} -- Y coordinate
+        step_size {int} -- step size of the current interation
+        dividor {float} -- value by which the random boundries are divided
+        random_upper {float} -- upper value of the random generator
+        random_lower {float} -- lower value of the ranodm generator
+        tex_size {int} -- size of the texture/heightmap
+    
+    Returns:
+        float array -- Array which defines the heightmap with the diamond step applied
+    """
+
     # Calculate half a step, needed to get the values from the middle of the diamon
     halfstep = step_size / 2
 
@@ -120,4 +167,6 @@ def diamond_square(width, height, random_upper, random_lower, dividor_multiplier
         save_path = "//heightmap.png"
     save_texture(arr_norm,save_path)
     
-diamond_square(1920,1080,5,-5,2,0,5,"")
+
+# Example method call
+# wdiamond_square(1920,1080,5,-5,2,0,5,"")
