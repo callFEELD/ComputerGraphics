@@ -179,4 +179,4 @@ def diamond_square(width, height, random_upper, random_lower, dividor_multiplier
 
 
 if __name__ == "__main__":
-    diamond_square(1920, 1080, 5, -5, 2, 0, 5, "//textures/height/heightmap.png")
+    diamond_square(1920, 1080, 5, -5, 2, 0, 5, "//textures/height/height_map.png")

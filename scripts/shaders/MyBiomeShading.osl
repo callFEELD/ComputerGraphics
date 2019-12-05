@@ -11,6 +11,8 @@ shader MyBiomeShading (
         float Height = 0.0,
         string MoistureMap = "",
         color Water = 0.0,
+        float BeachHeight = 0.0,
+        color BeachColor = 0.0,
         string BiomeMap = "",
         float WaterLevel = 0.0,
         output color Color = 0.0,
@@ -33,6 +35,8 @@ shader MyBiomeShading (
     if (Height <= WaterLevel && WaterLevel > 0) {
         c = Water;
         wm = 1.0;
+    } else if (Height > WaterLevel && (Height < WaterLevel + BeachHeight)) {
+        c = BeachColor;
     } else {
         c = texture(BiomeMap, x, 1- y, "wrap", "clamp");
     }
