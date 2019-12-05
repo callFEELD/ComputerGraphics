@@ -22,7 +22,7 @@ shader MyBiomeShading (
     
     // Get the height and the moisture
     float x = average(texture(MoistureMap, Uv[0], 1 - Uv[1]));
-    float y = Height-WaterLevel;
+    float y = Height - WaterLevel;
     
     
     // Create the colors that are for the output
@@ -33,11 +33,15 @@ shader MyBiomeShading (
     
     // Set color, depending on the height
     if (Height <= WaterLevel && WaterLevel > 0) {
+        // Case water
         c = Water;
+        // Create the water map for later use
         wm = 1.0;
     } else if (Height > WaterLevel && (Height < WaterLevel + BeachHeight)) {
+        // Do a small beach region
         c = BeachColor;
     } else {
+        // Else, just use the biome map
         c = texture(BiomeMap, x, 1- y, "wrap", "clamp");
     }
     
