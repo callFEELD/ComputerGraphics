@@ -1,15 +1,26 @@
-import numpy as np
-import bpy
+"""
+This scripts implements the Diamond Square Algorithm
+This script is part of the exercise 1.1
 
+On executing this script will generate a predefined
+height map based on the diamond square algorithm.
+"""
+
+import numpy as np
+
+# This imports the utils script containing crucial functionality
+# for this script. Please start the blender file in the root
+# folder, where it is located.
 import sys
 sys.path.append("./scripts/python")
 
-from moisture_map import save_texture, normalize
+from utils import save_texture, normalize
 
-# Performs Diamond-Square algorithm
+
 def diamond_square_main(arr, random_upper, random_lower, dividor_multiplier, seed_lower, seed_upper, tex_size):
-    """Main Method of the Diamond-Square Algorithm
-    
+    """
+    Main Method of the Diamond-Square Algorithm
+    Performs Diamond-Square algorithm
     Arguments:
         arr {2d float array} -- Array which defines the heightmap
         random_upper {float} -- upper value of the random generator
@@ -52,10 +63,9 @@ def diamond_square_main(arr, random_upper, random_lower, dividor_multiplier, see
     return arr
 
 
-
-# Performs diamond step, 
 def diamond(arr, x, y, step_size, dividor, random_upper, random_lower):
-    """Performs the diamond step of the diamons-square algorithm
+    """
+    Performs the diamond step of the diamons-square algorithm
     
     Arguments:
         arr {2d float array} -- Array which defines the heightmap
@@ -70,7 +80,6 @@ def diamond(arr, x, y, step_size, dividor, random_upper, random_lower):
     Returns:
         float array -- Array which defines the heightmap with the diamond step applied
     """
-
     # defines corners of the diamond | tl=top left; tr=top right; bl=bottom left; br=bottom right
     tl = arr[x][y]
     tr = arr[x][y+step_size]
@@ -86,6 +95,7 @@ def diamond(arr, x, y, step_size, dividor, random_upper, random_lower):
     # Write final value to array
     arr[int(x+step_size/2)][int(y+step_size/2)] = fin
     return arr
+
 
 def square(arr, x, y, step_size, dividor, random_upper, random_lower, tex_size):
     """Performs the square step of the diamons-square algorithm
@@ -166,7 +176,7 @@ def diamond_square(width, height, random_upper, random_lower, dividor_multiplier
     if (save_path == ""):
         save_path = "//heightmap.png"
     save_texture(arr_norm,save_path)
-    
 
-# Example method call
-# wdiamond_square(1920,1080,5,-5,2,0,5,"")
+
+if __name__ == "__main__":
+    diamond_square(1920, 1080, 5, -5, 2, 0, 5, "//textures/height/heightmap.png")
