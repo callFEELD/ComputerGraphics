@@ -3,7 +3,7 @@ Uni project
 
 ## Progess
 
-1.1 - Tobi
+1.1 - Tobi ✔️
 
 1.2 - Nickels ✔️
 
@@ -11,7 +11,7 @@ Uni project
 
 2.2 - Pascal & Nickels ✔️
 
-3   - Tobi
+3   - Tobi ✔️
 
 ## Files
 
