@@ -8,7 +8,6 @@ float average(color colorValue)
 
 shader MyDispl (
         normal Normal = 0.0,
-        point Uv = 0.0,
         float HeightFactor = 1.0,
         float WaterLevel = 0.5,
         float Height = 0.0,
