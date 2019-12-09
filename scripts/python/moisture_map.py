@@ -55,5 +55,5 @@ def generate_noise_map(height, width, scale):
 
 
 if __name__ == "__main__":
-    moisture_map = generate_noise_map(1024, 1024, 20)
+    moisture_map = generate_noise_map(1024, 1024, 5)
     save_texture(moisture_map, "//textures/moisture/moisture_map.png")
