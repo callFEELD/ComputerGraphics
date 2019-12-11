@@ -3,9 +3,9 @@ Blender Uni project
 
 `Abgabe bis Mittwoch, 11. Dezember 2019 um 23:59 Uhr`
 
-![animation](https://github.com/callFEELD/ComputerGraphics/docs/img/animation.gif)
+![animation](https://github.com/callFEELD/ComputerGraphics/blob/master/docs/img/animation.gif)
 
-[Animation AVI video](https://github.com/callFEELD/ComputerGraphics/videos/animation.avi)
+[Animation AVI video](https://github.com/callFEELD/ComputerGraphics/blob/master/videos/animation.avi)
 
 ## Animation Idea
 The full animation idea was to generate an landscape based on the computer game [Firewatch](http://www.firewatchgame.com/). The biomes map is based on the colorset of the game. The sunrise and sunset were added due to relfect the beatiful nature of the game. 
@@ -18,7 +18,7 @@ Nickels Witte
 Tobais Maier
 Pascal Golla
 ```
-[Mitwirkende Text File](https://github.com/callFEELD/ComputerGraphics/Mitwirkende.txt)
+[Mitwirkende Text File](https://github.com/callFEELD/ComputerGraphics/blob/master/Mitwirkende.txt)
 
 
 ## Files and structure
