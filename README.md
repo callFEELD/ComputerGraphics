@@ -33,12 +33,12 @@ Pascal Golla
 |   └── shaders: OSL Shaders
 |
 ├── textures: Textures used
-|	  ├── biomes
-|	  ├── height
-|	  ├── moisture
+|   ├── biomes
+|   ├── height
+|   ├── moisture
 |   └── normal
 |
 └── videos: Videos
-|	  └── animation.avi   Rendered animation
+|   └── animation.avi   Rendered animation
 ````
 
