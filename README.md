@@ -1,26 +1,30 @@
 # ComputerGraphics
-Uni project
+Blender Uni project
 
-## Progess
+`Abgabe bis Mittwoch, 11. Dezember 2019 um 23:59 Uhr`
 
-1.1 - Tobi ✔️
+![animation](https://github.com/callFEELD/ComputerGraphics/docs/img/animation.gif)
 
-1.2 - Nickels ✔️
+[Animation AVI video](https://github.com/callFEELD/ComputerGraphics/videos/animation.avi)
 
-2.1 - Pascal ✔️
+## Animation Idea
+The full animation idea was to generate an landscape based on the computer game [Firewatch](http://www.firewatchgame.com/). The biomes map is based on the colorset of the game. The sunrise and sunset were added due to relfect the beatiful nature of the game. 
 
-2.2 - Pascal & Nickels ✔️
+Due to the limitation of time and compute power, ideas such as trees, grass, reflecting water could not be implemented.
 
-3   - Tobi ✔️
+## Contributors
+```
+Nickels Witte
+Tobais Maier
+Pascal Golla
+```
+[Mitwirkende Text File](https://github.com/callFEELD/ComputerGraphics/Mitwirkende.txt)
 
-## Files
 
+## Files and structure
 ````
 .
-├── ComputerGrafik.blend: Moisture Map Generation
-├── displacement.blend: Displacement Mapping with Height Map
-├── shading.blend: Lambert & Phong Shading
-├── displ_shading: Shading with Moisture and Height
+├── maier_golla_witte_testat.blend      combined blender file
 |
 ├── docs: Documentation on the project
 |   └── 
@@ -34,6 +38,6 @@ Uni project
 |	├── moisture
 |   └── normal
 └── videos: Videos
-
+|	└── animation.avi   Rendered animation
 ````
 
