@@ -12,14 +12,6 @@ The full animation idea was to generate an landscape based on the computer game 
 
 Due to the limitation of time and compute power, ideas such as trees, grass, reflecting water could not be implemented.
 
-## Contributors
-```
-Nickels Witte
-Tobais Maier
-Pascal Golla
-```
-[Mitwirkende Text File](https://github.com/callFEELD/ComputerGraphics/blob/master/Mitwirkende.txt)
-
 
 ## Files and structure
 ````
